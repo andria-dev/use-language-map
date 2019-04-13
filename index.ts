@@ -49,7 +49,7 @@ export function useLanguageMap(
     }
 
     setActiveMaps(activeMaps);
-  }, [maps]);
+  }, [maps, isPrecise, setActiveMaps, navigator.languages]);
 
   return useCallback(
     (word: string) => {
