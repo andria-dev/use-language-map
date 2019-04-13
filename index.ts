@@ -37,7 +37,7 @@ export function useLanguageMap(
   const [activeMaps, setActiveMaps] = useState<WordMap[]>([]);
 
   useEffect(() => {
-    let activeMaps;
+    let activeMaps: WordMap[];
 
     if (isPrecise) {
       activeMaps = getActiveMaps(maps);
