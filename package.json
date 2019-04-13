@@ -1,0 +1,10 @@
+{
+  "name": "use-language-map",
+  "version": "1.0.0",
+  "description": "A react hook for mapping languages to values",
+  "main": "dist/index.js",
+  "repository": "git@github.com:ChrisBrownie55/use-language-map.git",
+  "author": "<chbphone55@gmail.com>",
+  "license": "MIT",
+  "private": false
+}
