@@ -8,32 +8,51 @@ interface LanguageMap {
   [s: string]: WordMap;
 }
 
-function getActiveMaps(maps: LanguageMap, languages: readonly string[] | string[]=navigator.languages) {
-  return navigator.languages.map(language => maps[language]).filter(x => !!x);
+interface Options {
+  isPrecise?: boolean;
+}
+
+function getActiveMaps(maps: LanguageMap, languages = navigator.languages) {
+  return languages.map(language => maps[language]).filter(x => !!x);
 }
 
 /**
- * ```
- * function MyComponent() {
- *   const translate = useLanguageMap({
- *     'de-de': { of: 'von' },
- *   }, 'of')
- *
- *   return (
- *     <Typography>1 {translate('of')} 2</Typography>
- *   )
- * }
- * ```
+ * ```jsx
+function MyComponent() {
+  const translate = useLanguageMap({
+    'de': { of: 'von' },
+    'es': { of: 'de' }
+  }, { isPrecise: false })
+
+  return (
+    <Typography>1 {translate('of')} 2</Typography>
+  )
+}
+```
  */
-export function useLanguageMap(maps: LanguageMap, fallback: string) {
-  const [activeMaps, setActiveMaps] = useState(getActiveMaps(maps));
+export function useLanguageMap(
+  maps: LanguageMap,
+  { isPrecise = true }: Options
+) {
+  const [activeMaps, setActiveMaps] = useState<WordMap[]>([]);
 
   useEffect(() => {
-    setActiveMaps(getActiveMaps(maps));
+    let activeMaps;
+
+    if (isPrecise) {
+      activeMaps = getActiveMaps(maps);
+    } else {
+      const languages = navigator.languages.map(
+        language => language.split('-')[0]
+      );
+      activeMaps = getActiveMaps(maps, languages);
+    }
+
+    setActiveMaps(activeMaps);
   }, [maps]);
 
-  return useCallback((word: string) => {
-    if (activeMaps.length) {
+  return useCallback(
+    (word: string) => {
       for (const map of activeMaps) {
         const translatedWord = map[word];
 
@@ -41,8 +60,9 @@ export function useLanguageMap(maps: LanguageMap, fallback: string) {
           return translatedWord;
         }
       }
-    }
 
-    return fallback;
-  }, [activeMaps, fallback]);
+      return word;
+    },
+    [activeMaps]
+  );
 }
