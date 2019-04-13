@@ -2,9 +2,19 @@
   "name": "use-language-map",
   "version": "1.0.0",
   "description": "A react hook for mapping languages to values",
+  "source": "index.ts",
   "main": "dist/index.js",
+  "module": "dist/index.m.js",
+  "unpkg": "dist/index.umd.js",
+  "scripts": {
+    "build": "microbundle --raw",
+    "watch": "microbundle watch --raw"
+  },
   "repository": "git@github.com:ChrisBrownie55/use-language-map.git",
   "author": "<chbphone55@gmail.com>",
   "license": "MIT",
-  "private": false
+  "private": false,
+  "devDependencies": {
+    "microbundle": "^0.11.0"
+  }
 }
