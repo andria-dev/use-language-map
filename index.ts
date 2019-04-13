@@ -17,15 +17,22 @@ function getActiveMaps(maps: LanguageMap, languages = navigator.languages) {
 }
 
 /**
+ * ### Example:
  * ```jsx
 function MyComponent() {
   const translate = useLanguageMap({
-    'de': { of: 'von' },
-    'es': { of: 'de' }
+    'de': {
+      of: 'von',
+      pages: 'Seiten'
+    },
+    'es': {
+      of: 'de',
+      pages: 'páginas'
+    }
   }, { isPrecise: false })
 
   return (
-    <Typography>1 {translate('of')} 2</Typography>
+    <p>1 {translate('of')} 2 {translate('pages'})</p>
   )
 }
 ```
