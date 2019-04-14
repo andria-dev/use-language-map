@@ -16,27 +16,6 @@ function getActiveMaps(maps: LanguageMap, languages = navigator.languages) {
   return languages.map(language => maps[language]).filter(x => !!x);
 }
 
-/**
- * ### Example:
- * ```jsx
-function MyComponent() {
-  const translate = useLanguageMap({
-    'de': {
-      of: 'von',
-      pages: 'Seiten'
-    },
-    'es': {
-      of: 'de',
-      pages: 'páginas'
-    }
-  }, { isPrecise: false })
-
-  return (
-    <p>1 {translate('of')} 2 {translate('pages'})</p>
-  )
-}
-```
- */
 export function useLanguageMap(
   maps: LanguageMap,
   { isPrecise = true }: Options = {}
