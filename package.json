@@ -22,9 +22,12 @@
   "devDependencies": {
     "@types/react": "^16.8.13",
     "ava": "^1.4.1",
-    "microbundle": "^0.11.0"
+    "microbundle": "^0.11.0",
+    "react-dom": "^16.8.0",
+    "react-hooks-testing-library": "^0.4.0"
   },
-  "dependencies": {
-    "react": "^16.8.6"
+  "dependencies": {},
+  "peerDependencies": {
+    "react": "^16.8.0"
   }
 }
