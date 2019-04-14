@@ -13,7 +13,7 @@
   "scripts": {
     "build": "microbundle --raw",
     "watch": "microbundle watch --raw",
-    "test": "ava"
+    "test": "jest"
   },
   "repository": "git@github.com:ChrisBrownie55/use-language-map.git",
   "author": "<chbphone55@gmail.com>",
@@ -21,7 +21,7 @@
   "private": false,
   "devDependencies": {
     "@types/react": "^16.8.13",
-    "ava": "^1.4.1",
+    "jest": "^24.7.1",
     "microbundle": "^0.11.0",
     "react": "^16.8.0",
     "react-dom": "^16.8.0",

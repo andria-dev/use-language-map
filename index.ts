@@ -39,7 +39,7 @@ function MyComponent() {
  */
 export function useLanguageMap(
   maps: LanguageMap,
-  { isPrecise = true }: Options
+  { isPrecise = true }: Options = {}
 ) {
   const [activeMaps, setActiveMaps] = useState<WordMap[]>([]);
 
