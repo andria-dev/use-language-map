@@ -21,8 +21,7 @@ export function useLanguageMap(
   { isPrecise = true }: Options = {}
 ) {
   const [activeMaps, setActiveMaps] = useState<WordMap[]>([]);
-
-  useEffect(() => {
+  const updateActiveMaps = useCallback(() => {
     let activeMaps: WordMap[];
 
     if (isPrecise) {
@@ -35,7 +34,16 @@ export function useLanguageMap(
     }
 
     setActiveMaps(activeMaps);
-  }, [maps, isPrecise, setActiveMaps, navigator.languages]);
+  }, [maps, isPrecise, setActiveMaps]);
+
+  useEffect(() => {
+    updateActiveMaps();
+    window.addEventListener('languagechange', updateActiveMaps);
+
+    return () => {
+      window.removeEventListener('languagechange', updateActiveMaps);
+    };
+  }, [updateActiveMaps]);
 
   return useCallback(
     (word: string) => {

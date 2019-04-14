@@ -47,3 +47,25 @@ test('In imprecise mode, the region is disregarded', () => {
   );
   expect(result.current('of')).toBe('de');
 });
+
+test('Result updates when the languages change', () => {
+  setLanguages('de');
+  const languageMap = {
+    de: {
+      of: 'von'
+    },
+    es: {
+      of: 'de'
+    }
+  };
+
+  const { result } = renderHook(() => useLanguageMap(languageMap));
+  expect(result.current('of')).toBe('von');
+
+  act(() => {
+    setLanguages('es');
+    window.dispatchEvent(new Event('languagechange'));
+  });
+
+  expect(result.current('of')).toBe('de');
+});
